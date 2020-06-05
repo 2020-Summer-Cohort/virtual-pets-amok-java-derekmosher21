@@ -6,6 +6,9 @@ public class Application {
     static VirtualPetShelter virtualPetShelter = new VirtualPetShelter();
 
     public static void main(String[] args) {
+
+        OrganicDog organicDog1 = new OrganicDog("Martin", )
+
         displayIntroduction();
         displayAllPets();
         gameLoop();
@@ -16,9 +19,7 @@ public class Application {
     public static void displayIntroduction() {
         System.out.println("");
         System.out.println("Welcome to Derek's Pet Shelter!");
-        System.out.println("Do not let your pet's hunger/thirst get too high or happiness too low!");
         System.out.println("");
-        virtualPetShelter.addFirstPets();
 
     }
 

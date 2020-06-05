@@ -5,22 +5,10 @@ import java.util.Map;
 
 public class VirtualPetShelter {
 
-    VirtualPet martin = new VirtualPet("Martin", "Cat", 12, 7, 5);
-    VirtualPet oliver = new VirtualPet("Oliver", "Cat", 4, 3, 7);
-
     private Map<String, VirtualPet> pets = new HashMap<>();
 
-    public void addFirstPets() {
-        pets.put(martin.getPetName(), martin);
-        pets.put(oliver.getPetName(), oliver);
-    }
-
-    public void getAllPets() {
-        System.out.println(" Name\t\t|\tType\t|\tHunger\t|\tThirst\t|\tHappiness\t|");
-        for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
-            VirtualPet pet = mapEntry.getValue();
-            System.out.println(pet.getPetName() + "\t\t|\t" + pet.getPetDescription() + "\t\t|\t" + pet.getHunger() + "\t\t|\t" + pet.getThirst() + "\t\t|\t" + pet.getHappiness() + "\t\t\t|\t");
-        }
+    public Map<String, VirtualPet> getPets() {
+        return pets;
     }
 
     public VirtualPet getVirtualPet(String requestedPetName) {
@@ -44,15 +32,17 @@ public class VirtualPetShelter {
 
     public void feedAllPets() {
         for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
-            VirtualPet pet = mapEntry.getValue();
-            pet.feedPet();
+            if (mapEntry.getValue() instanceof OrganicPets) {
+                ((OrganicPets) mapEntry.getValue()).feed();
+            }
         }
     }
 
     public void waterAllPets() {
         for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
-            VirtualPet pet = mapEntry.getValue();
-            pet.waterPet();
+            if (mapEntry.getValue() instanceof OrganicPets) {
+                ((OrganicPets) mapEntry.getValue()).water();
+            }
         }
     }
 
@@ -61,26 +51,104 @@ public class VirtualPetShelter {
         pet.playWithPet();
     }
 
-    public void tickAllPets() {
+    public void walkAllDogs() {
         for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
-            VirtualPet pet = mapEntry.getValue();
-            pet.tick();
+            if (mapEntry.getValue() instanceof OrganicDog) {
+                ((OrganicDog) mapEntry.getValue()).walkDog();
+            }
         }
     }
+
+    public void oilRoboticPets() {
+        for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
+            if (mapEntry.getValue() instanceof RoboticPets) {
+                ((RoboticPets) mapEntry.getValue()).oilPet();
+            }
+        }
+    }
+
+    public void cleanAllDogsCages() {
+        for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
+            if (mapEntry.getValue() instanceof OrganicDog) {
+                ((OrganicDog) mapEntry.getValue()).cleanDogCage();
+            }
+        }
+    }
+
+    public void tickAllPets() {
+        for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
+            if (mapEntry.getValue() instanceof OrganicDog) {
+                ((OrganicDog) mapEntry.getValue()).tick();
+            } else if (mapEntry.getValue() instanceof OrganicPets) {
+                ((OrganicPets) mapEntry.getValue()).tick();
+            } else if (mapEntry.getValue() instanceof RoboticPets) {
+                ((RoboticPets) mapEntry.getValue()).tick();
+            } else {
+                VirtualPet pet = mapEntry.getValue();
+                pet.tick();
+            }
+        }
+    }
+
 
     protected boolean checkHealthOfAllPets() {
         boolean checkHealthOfAllPets = true;
         for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
-            VirtualPet pet = mapEntry.getValue();
-            if (pet.arePetsHealthy()) {
-                checkHealthOfAllPets = false;
-                break;
-
+            if (mapEntry.getValue() instanceof OrganicDog) {
+                return ((OrganicDog) mapEntry.getValue()).arePetsHealthy();
+            } else if (mapEntry.getValue() instanceof OrganicPets) {
+                return ((OrganicPets) mapEntry.getValue()).arePetsHealthy();
+            } else if (mapEntry.getValue() instanceof RoboticPets) {
+                return ((RoboticPets) mapEntry.getValue()).arePetsHealthy();
             }
         }
         return checkHealthOfAllPets;
 
     }
 
+    public void printNamesAndDescriptions() {
+        for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
+            String petName = mapEntry.getKey();
+            String petDescription = mapEntry.getValue().getPetDescription();
+            System.out.println(petName + " -- " + petDescription);
+        }
+    }
+
+    public void getPetHealthStatus() {
+        for (Map.Entry<String, VirtualPet> mapEntry : pets.entrySet()) {
+            if (mapEntry.getValue() instanceof OrganicDog) {
+                String petName = mapEntry.getKey();
+                int petHunger = ((OrganicDog) mapEntry.getValue()).getHunger();
+                int petThirst = ((OrganicDog) mapEntry.getValue()).getThirst();
+                int petWaste = ((OrganicDog) mapEntry.getValue()).getWaste();
+                int petHealth = mapEntry.getValue().getHealth();
+                int petHappiness = mapEntry.getValue().getHappiness();
+                int petCleanliness = ((OrganicDog) mapEntry.getValue()).getCageCleanliness();
+                System.out.println(petName + " - Hunger: " + petHunger + " Thirst: " + petThirst + " Waste: " + petWaste + " Health: " + petHealth + " Happiness: " + petHappiness + " Cage Cleanliness: " + petCleanliness);
+
+            } else if (mapEntry.getValue() instanceof RoboticPets) {
+                String petName = mapEntry.getKey();
+                int petHealth = mapEntry.getValue().getHealth();
+                int petHappiness = mapEntry.getValue().getHappiness();
+                int petOil = ((RoboticPets) mapEntry.getValue()).getOilLevel();
+                System.out.println(petName + " - Health: " + petHealth + " Happiness: " + petHappiness + " Oil level: " + petOil);
+
+            } else if (mapEntry.getValue() instanceof OrganicPets) {
+                String petName = mapEntry.getKey();
+                int petHunger = ((OrganicPets) mapEntry.getValue()).getHunger();
+                int petThirst = ((OrganicPets) mapEntry.getValue()).getThirst();
+                int petWaste = ((OrganicPets) mapEntry.getValue()).getWaste();
+                int petHealth = mapEntry.getValue().getHealth();
+                int petHappiness = mapEntry.getValue().getHappiness();
+                System.out.println(petName + " - Hunger: " + petHunger + " Thirst: " + petThirst + " Waste: " + petWaste + " Health: " + petHealth + " Happiness: " + petHappiness);
+            } else {
+
+                String petName = mapEntry.getKey();
+                int petHealth = mapEntry.getValue().getHealth();
+                int petHappiness = mapEntry.getValue().getHappiness();
+                System.out.println(petName + " - Health: " + petHealth + " Happiness: " + petHappiness);
+            }
+        }
+    }
 
 }
