@@ -3,13 +3,11 @@ package pets_amok;
 public class VirtualPet {
     private String petName;
     private String petDescription;
-    private int hunger;
-    private int thirst;
+    private int health;
     private int happiness;
 
-    public VirtualPet(String petName, String petDescription, int hunger, int thirst, int happiness) {
-        this.hunger = hunger;
-        this.thirst = thirst;
+    public VirtualPet(String petName, String petDescription, int health, int happiness) {
+        this.health = health;
         this.happiness = happiness;
         this.petName = petName;
         this.petDescription = petDescription;
@@ -23,42 +21,25 @@ public class VirtualPet {
         return petDescription;
     }
 
-    public int getHunger() {
-        return hunger;
-    }
-
-    public int getThirst() {
-        return thirst;
-    }
+    public int getHealth() { return health; }
 
     public int getHappiness() {
         return happiness;
     }
 
-    public void feedPet() {
-        hunger = hunger - 4;
-        thirst++;
-    }
-
-    public void waterPet() {
-        thirst = thirst - 3;
-        hunger++;
-    }
 
     public void playWithPet() {
         happiness = happiness + 5;
-        hunger++;
-        thirst++;
+        health++ ;
     }
 
     public void tick() {
-        hunger++;
-        thirst++;
         happiness--;
+        health--;
     }
 
-    protected boolean arePetsHealthy() {
-        return getHunger() < 20 && getThirst() < 20 && getHappiness() > 0;
+    public boolean arePetsHealthy() {
+        return  getHealth() > 0 && getHappiness() > 0;
     }
 
 }
