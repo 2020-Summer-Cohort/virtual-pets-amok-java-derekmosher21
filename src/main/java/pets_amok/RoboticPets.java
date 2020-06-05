@@ -4,18 +4,21 @@ public class RoboticPets extends VirtualPet implements RoboticActions {
 
     private int oilLevel;
 
-    public RoboticPets(String petName, String petDescription, int oilLevel, int health, int happiness ) {
-        super(petName, petDescription, health, happiness); ;
+    public RoboticPets(String petName, String petDescription, int oilLevel, int health, int happiness) {
+        super(petName, petDescription, health, happiness);
+        ;
         this.oilLevel = oilLevel;
 
     }
 
     @Override
-    public void oilPet() { oilLevel++; }
+    public void oilPet() {
+        oilLevel++;
+    }
 
     @Override
     public boolean arePetsHealthy() {
-        return  getOilLevel() > 0;
+        return getOilLevel() > 0;
     }
 
     @Override
@@ -24,7 +27,9 @@ public class RoboticPets extends VirtualPet implements RoboticActions {
         oilLevel--;
     }
 
-    public int getOilLevel() { return oilLevel; }
+    public int getOilLevel() {
+        return oilLevel;
+    }
 
 }
 

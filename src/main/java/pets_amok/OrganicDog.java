@@ -9,7 +9,9 @@ public class OrganicDog extends OrganicPets {
         this.cageCleanliness = cageCleanliness;
     }
 
-    public void cleanDogCage() { cageCleanliness = cageCleanliness + 3;}
+    public void cleanDogCage() {
+        cageCleanliness = cageCleanliness + 3;
+    }
 
     public void walkDog() {
         waste--;
@@ -17,7 +19,7 @@ public class OrganicDog extends OrganicPets {
     }
 
     @Override
-    public void tick(){
+    public void tick() {
         super.tick();
         cageCleanliness--;
     }
@@ -28,5 +30,7 @@ public class OrganicDog extends OrganicPets {
         return getCageCleanliness() > 0;
     }
 
-    public int getCageCleanliness() { return cageCleanliness; }
+    public int getCageCleanliness() {
+        return cageCleanliness;
+    }
 }

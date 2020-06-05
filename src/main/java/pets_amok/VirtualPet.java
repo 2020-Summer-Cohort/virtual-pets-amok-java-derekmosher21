@@ -21,7 +21,9 @@ public class VirtualPet {
         return petDescription;
     }
 
-    public int getHealth() { return health; }
+    public int getHealth() {
+        return health;
+    }
 
     public int getHappiness() {
         return happiness;
@@ -30,7 +32,7 @@ public class VirtualPet {
 
     public void playWithPet() {
         happiness = happiness + 5;
-        health++ ;
+        health++;
     }
 
     public void tick() {
@@ -39,7 +41,7 @@ public class VirtualPet {
     }
 
     public boolean arePetsHealthy() {
-        return  getHealth() > 0 && getHappiness() > 0;
+        return getHealth() > 0 && getHappiness() > 0;
     }
 
 }

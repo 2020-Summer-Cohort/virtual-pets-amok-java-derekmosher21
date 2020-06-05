@@ -24,6 +24,7 @@ public class OrganicPets extends VirtualPet implements OrganicActions {
         this.thirst = this.thirst - 3;
 
     }
+
     @Override
     public void playWithPet() {
         super.playWithPet();
@@ -41,13 +42,19 @@ public class OrganicPets extends VirtualPet implements OrganicActions {
 
     @Override
     public boolean arePetsHealthy() {
-        return  super.getHealth() > 0 && super.getHappiness() > 0 && getThirst() < 20 && getHunger() < 20 && getWaste() < 20;
+        return super.getHealth() > 0 && super.getHappiness() > 0 && getThirst() < 20 && getHunger() < 20 && getWaste() < 20;
     }
 
-    public int getThirst() { return thirst; }
+    public int getThirst() {
+        return thirst;
+    }
 
-    public int getHunger() { return hunger; }
+    public int getHunger() {
+        return hunger;
+    }
 
-    public int getWaste() { return waste; }
+    public int getWaste() {
+        return waste;
+    }
 
 }
